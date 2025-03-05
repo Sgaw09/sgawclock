@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myanmar Real-Time Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f4f4f4;
+        }
+        #clock {
+            font-size: 2em;
+            font-weight: bold;
+            background: white;
+            padding: 10px 20px;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>ကရင်ရဲ့နာရီ</h1>
+    <div id="clock"></div>
+    <script>
+        function updateClock() {
+            let now = new Date();
+            let utc = now.getTime() + now.getTimezoneOffset() * 60000;
+            let myanmarTime = new Date(utc + (6.5 * 3600000));
+            let hours = myanmarTime.getHours().toString().padStart(2, '0');
+            let minutes = myanmarTime.getMinutes().toString().padStart(2, '0');
+            let seconds = myanmarTime.getSeconds().toString().padStart(2, '0');
+            document.getElementById("clock").innerText = `${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call
+    </script>
+</body>
+</html>
